@@ -1,0 +1,140 @@
+/* ================================
+   Teacher Dashboard Styling
+================================ */
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #d7e8f7, #ffffff);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.dashboard-box {
+  background: #ffffff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 40px;
+  width: 420px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dashboard-box:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.sub-text {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.upload-label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.file-input {
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  width: 80%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.upload-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.upload-btn:hover {
+  background-color: #0056b3;
+}
+
+.upload-message {
+  font-size: 14px;
+  margin-top: 8px;
+  height: 18px;
+}
+
+h2 {
+  color: #007bff;
+  margin-top: 15px;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.file-list li {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 6px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.file-list button {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.file-list button:hover {
+  background: #1e7e34;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #b02a37;
+}

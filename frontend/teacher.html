@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="teacher.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-box">
+      <h1>👩‍🏫 Welcome to Teacher Dashboard</h1>
+      <p class="sub-text">Logged in as <strong>Teacher</strong></p>
+
+      <!-- Upload Section -->
+      <form id="uploadForm" class="upload-form">
+        <label for="fileInput" class="upload-label">Select File to Upload:</label>
+        <input type="file" id="fileInput" class="file-input" />
+        <button type="submit" class="upload-btn">📤 Upload File</button>
+        <p id="uploadMessage" class="upload-message"></p>
+      </form>
+
+      <hr />
+
+      <!-- Uploaded Files List -->
+      <h2>📁 Uploaded Files</h2>
+      <ul id="fileList" class="file-list"></ul>
+
+      <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+    </div>
+  </div>
+
+  <script src="teacher.js"></script>
+  <script>
+    // Logout Functionality
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.clear();
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
