@@ -81,10 +81,14 @@ h1 {
   background-color: #0056b3;
 }
 
+/* 🟢 Slight enhancement to make upload message always visible */
 .upload-message {
   font-size: 14px;
-  margin-top: 8px;
-  height: 18px;
+  margin-top: 10px;
+  height: auto; /* previously fixed, now auto to allow full text */
+  min-height: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 h2 {
@@ -137,4 +141,10 @@ h2 {
 
 .logout-btn:hover {
   background: #b02a37;
+}
+
+#uploadMessage {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }

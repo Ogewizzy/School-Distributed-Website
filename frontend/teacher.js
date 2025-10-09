@@ -1,8 +1,5 @@
-// ==========================
-// TEACHER DASHBOARD SCRIPT
-// ==========================
 
-// Select DOM elements
+// TEACHER DASHBOARD SCRIPT
 const uploadForm = document.getElementById("uploadForm");
 const fileInput = document.getElementById("fileInput");
 const uploadMessage = document.getElementById("uploadMessage");
@@ -11,9 +8,9 @@ const fileList = document.getElementById("fileList");
 // Backend base URL
 const BASE_URL = "http://localhost:5000/api/files";
 
-// ==========================
+
 // UPLOAD FILE FUNCTION
-// ==========================
+
 if (uploadForm) {
   uploadForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -27,7 +24,7 @@ if (uploadForm) {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("uploaderRole", "Teacher"); // ✅ Add role info
+    formData.append("uploaderRole", "teacher"); // ✅ ensures consistent role
 
     try {
       const response = await fetch(`${BASE_URL}/upload`, {
@@ -41,7 +38,7 @@ if (uploadForm) {
         uploadMessage.textContent = "✅ File uploaded successfully!";
         uploadMessage.style.color = "green";
         fileInput.value = "";
-        fetchFiles(); // refresh the file list
+        fetchFiles(); // refresh the file list immediately
       } else {
         uploadMessage.textContent = data.message || "❌ Upload failed.";
         uploadMessage.style.color = "red";
@@ -54,27 +51,29 @@ if (uploadForm) {
   });
 }
 
-// ==========================
+
 // FETCH FILES FUNCTION
-// ==========================
+
 async function fetchFiles() {
   try {
     const response = await fetch(BASE_URL);
     const files = await response.json();
 
-    // Clear list
+    // Clear list before showing updated files
     fileList.innerHTML = "";
 
-    if (files.length === 0) {
+    if (!Array.isArray(files) || files.length === 0) {
       fileList.innerHTML = "<p>No files uploaded yet.</p>";
       return;
     }
 
+    // ✅ Display clean, correct info
     files.forEach((file) => {
+      const role = file.uploaderRole || "Unknown";
       const listItem = document.createElement("li");
       listItem.innerHTML = `
         📄 ${file.filename}
-        <small style="color: gray;">— Uploaded by Teacher </small>
+        <small style="color: gray;">— Uploaded by ${role}</small>
         <button onclick="downloadFile('${file.filename}')">⬇ Download</button>
       `;
       fileList.appendChild(listItem);
@@ -85,9 +84,9 @@ async function fetchFiles() {
   }
 }
 
-// ==========================
+
 // DOWNLOAD FILE FUNCTION
-// ==========================
+
 function downloadFile(filename) {
   window.open(`${BASE_URL}/download/${filename}`, "_blank");
 }

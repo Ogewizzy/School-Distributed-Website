@@ -1,8 +1,7 @@
 // ==========================
-// TEACHER DASHBOARD SCRIPT
+// STUDENT DASHBOARD SCRIPT
 // ==========================
 
-// Select DOM elements
 const uploadForm = document.getElementById("uploadForm");
 const fileInput = document.getElementById("fileInput");
 const uploadMessage = document.getElementById("uploadMessage");
@@ -27,7 +26,7 @@ if (uploadForm) {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("uploaderRole", "Student"); // ✅ Add role info
+    formData.append("uploaderRole", "student"); 
 
     try {
       const response = await fetch(`${BASE_URL}/upload`, {
@@ -41,7 +40,7 @@ if (uploadForm) {
         uploadMessage.textContent = "✅ File uploaded successfully!";
         uploadMessage.style.color = "green";
         fileInput.value = "";
-        fetchFiles(); // refresh the file list
+        fetchFiles(); 
       } else {
         uploadMessage.textContent = data.message || "❌ Upload failed.";
         uploadMessage.style.color = "red";
@@ -54,27 +53,27 @@ if (uploadForm) {
   });
 }
 
-// ==========================
+
 // FETCH FILES FUNCTION
-// ==========================
+
 async function fetchFiles() {
   try {
     const response = await fetch(BASE_URL);
     const files = await response.json();
 
-    // Clear list
     fileList.innerHTML = "";
 
-    if (files.length === 0) {
+    if (!Array.isArray(files) || files.length === 0) {
       fileList.innerHTML = "<p>No files uploaded yet.</p>";
       return;
     }
 
     files.forEach((file) => {
+      const role = file.uploaderRole || "Unknown";
       const listItem = document.createElement("li");
       listItem.innerHTML = `
         📄 ${file.filename}
-        <small style="color: gray;">— Uploaded by Student </small>
+        <small style="color: gray;">— Uploaded by ${role}</small>
         <button onclick="downloadFile('${file.filename}')">⬇ Download</button>
       `;
       fileList.appendChild(listItem);
@@ -85,13 +84,12 @@ async function fetchFiles() {
   }
 }
 
-// ==========================
+
 // DOWNLOAD FILE FUNCTION
-// ==========================
+
 function downloadFile(filename) {
   window.open(`${BASE_URL}/download/${filename}`, "_blank");
 }
 
 // Load files on page load
 document.addEventListener("DOMContentLoaded", fetchFiles);
-
